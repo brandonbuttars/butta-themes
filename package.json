@@ -1,0 +1,42 @@
+{
+  "name": "christmas-theme",
+  "displayName": "Christmas Theme",
+  "description": "A festive Christmas theme with light and dark versions featuring holiday colors and optional snowflake animations",
+  "version": "1.0.0",
+  "publisher": "butta-themes",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "christmas",
+    "holiday",
+    "festive",
+    "winter",
+    "theme",
+    "dark",
+    "light"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Christmas Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/christmas-dark.json"
+      },
+      {
+        "label": "Christmas Light",
+        "uiTheme": "vs",
+        "path": "./themes/christmas-light.json"
+      }
+    ]
+  },
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brandonbuttars/butta-themes"
+  },
+  "license": "MIT"
+}
