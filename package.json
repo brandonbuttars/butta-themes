@@ -33,7 +33,6 @@
       }
     ]
   },
-  "icon": "icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/brandonbuttars/butta-themes"
