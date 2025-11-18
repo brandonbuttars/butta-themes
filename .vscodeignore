@@ -1,0 +1,6 @@
+.git
+.gitignore
+.gitattributes
+test-example.js
+*.vsix
+node_modules
