@@ -45,8 +45,8 @@ window.buttaThemeConfig = {
     //
     // Example - Local SVG files:
     // images: [
-    //   'file:///Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.1/images/snowflake1.svg',
-    //   'file:///Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.1/images/snowflake2.svg'
+    //   'file:///Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.0/images/snowflake1.svg',
+    //   'file:///Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.0/images/snowflake2.svg'
     // ],
     //
     // Example - Local PNG files:

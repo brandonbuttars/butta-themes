@@ -94,7 +94,7 @@ The falling animations (snowflakes by default) are optional and require the Cust
 ```json
 {
   "vscode_custom_css.imports": [
-    "file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/snowflakes.js"
+    "file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.0/snowflakes.js"
   ]
 }
 ```
@@ -103,8 +103,8 @@ The falling animations (snowflakes by default) are optional and require the Cust
 ```json
 {
   "vscode_custom_css.imports": [
-    "file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/falling-config.js",
-    "file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/snowflakes.js"
+    "file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.0/falling-config.js",
+    "file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.0/snowflakes.js"
   ]
 }
 ```
@@ -114,15 +114,15 @@ Then edit `falling-config.js` to customize characters, speed, size, etc.
 ```json
 {
   "vscode_custom_css.imports": [
-    "file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/snowflakes.css"
+    "file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.0/snowflakes.css"
   ]
 }
 ```
 
 **Path Examples:**
-- Windows: `file:///C:/Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/`
-- macOS: `file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/`
-- Linux: `file:///home/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/`
+- Windows: `file:///C:/Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.0/`
+- macOS: `file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.0/`
+- Linux: `file:///home/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.0/`
 
 ### Step 3: Enable Custom CSS
 

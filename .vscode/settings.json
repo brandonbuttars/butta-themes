@@ -15,9 +15,9 @@
   // 5. Restart VS Code
   //
   // Extension paths:
-  //   macOS:   /Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.1/
-  //   Windows: C:/Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.1/
-  //   Linux:   /home/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.1/
+  //   macOS:   /Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.0/
+  //   Windows: C:/Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.0/
+  //   Linux:   /home/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.0/
   //
   // ─────────────────────────────────────────────────────────────────────────────
   // OPTION 1: Default snowflakes (no config needed)
