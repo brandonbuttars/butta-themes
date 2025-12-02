@@ -1,0 +1,50 @@
+{
+  // Christmas Theme - Recommended VS Code Settings
+  //
+  // SNOWFLAKE EFFECT SETUP:
+  // The snowflake animation requires the "Custom CSS and JS Loader" extension.
+  // 1. Install extension: be5invis.vscode-custom-css
+  // 2. Update the paths below to match your extension installation location
+  // 3. Run command palette (Cmd/Ctrl+Shift+P): "Enable Custom CSS and JS"
+  // 4. Restart VS Code
+  //
+  // IMPORTANT: You must use absolute file paths. Update the paths below!
+  //
+  // Common installation paths:
+  //   macOS:   ~/.vscode/extensions/butta-themes.christmas-theme-1.0.0/
+  //   Windows: %USERPROFILE%\.vscode\extensions\butta-themes.christmas-theme-1.0.0\
+  //   Linux:   ~/.vscode/extensions/butta-themes.christmas-theme-1.0.0/
+
+  // Uncomment and update paths to enable snowflakes:
+  // "vscode_custom_css.imports": [
+  //   "file:///Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.0/snowflakes.css",
+  //   "file:///Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.0/snowflakes.js"
+  // ],
+
+  // Choose ONE of the following snowflake options:
+  //
+  // Option 1: CSS-only snowflakes (lightweight, subtle effect)
+  // "vscode_custom_css.imports": [
+  //   "file:///PATH_TO_EXTENSION/snowflakes.css"
+  // ],
+  //
+  // Option 2: JavaScript snowflakes (more realistic, animated Unicode snowflakes)
+  // "vscode_custom_css.imports": [
+  //   "file:///PATH_TO_EXTENSION/snowflakes.js"
+  // ],
+  //
+  // Option 3: Both CSS and JS (maximum festive effect)
+  // "vscode_custom_css.imports": [
+  //   "file:///PATH_TO_EXTENSION/snowflakes.css",
+  //   "file:///PATH_TO_EXTENSION/snowflakes.js"
+  // ],
+
+  // Theme recommendation
+  "workbench.colorTheme": "Christmas Dark",
+
+  // Editor settings that complement the Christmas theme
+  "editor.cursorBlinking": "smooth",
+  "editor.smoothScrolling": true,
+  "workbench.list.smoothScrolling": true,
+  "editor.cursorSmoothCaretAnimation": "on"
+}

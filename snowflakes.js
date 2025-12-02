@@ -10,63 +10,92 @@
  *    ]
  * 3. Run command: "Enable Custom CSS and JS"
  * 4. Restart VS Code
+ *
+ * Performance optimizations included:
+ * - Reduced snowflake count and creation interval
+ * - Removed expensive text-shadow
+ * - Uses will-change for GPU acceleration
+ * - Pauses animation when tab is not visible
+ * - Uses requestAnimationFrame for smoother timing
  */
 
 (function() {
   'use strict';
 
-  // Configuration
+  // Configuration - optimized for performance
   const config = {
-    snowflakeCount: 50,        // Number of snowflakes
-    creationInterval: 300,     // Milliseconds between creating snowflakes
+    snowflakeCount: 25,        // Reduced from 50 for better performance
+    creationInterval: 500,     // Increased from 300ms to reduce DOM operations
     minDuration: 10,           // Minimum fall duration in seconds
     maxDuration: 20,           // Maximum fall duration in seconds
     minSize: 8,                // Minimum snowflake size in pixels
     maxSize: 18,               // Maximum snowflake size in pixels
-    minOpacity: 0.3,           // Minimum opacity
-    maxOpacity: 0.7,           // Maximum opacity
+    minOpacity: 0.4,           // Minimum opacity (slightly increased for visibility without text-shadow)
+    maxOpacity: 0.8,           // Maximum opacity
     snowflakeChars: ['❄', '❅', '❆'] // Snowflake characters to use
   };
 
+  let isVisible = true;
+  let intervalId = null;
+  let activeSnowflakes = 0;
+
   function createSnowflake() {
+    // Don't create if tab not visible or at max capacity
+    if (!isVisible || activeSnowflakes >= config.snowflakeCount) {
+      return;
+    }
+
+    activeSnowflakes++;
+
     const snowflake = document.createElement('div');
     const char = config.snowflakeChars[Math.floor(Math.random() * config.snowflakeChars.length)];
-
-    snowflake.innerHTML = char;
-    snowflake.className = 'snowflake';
-    snowflake.style.position = 'fixed';
-    snowflake.style.top = '-20px';
-    snowflake.style.left = Math.random() * window.innerWidth + 'px';
-    snowflake.style.color = 'white';
-    snowflake.style.fontSize = (Math.random() * (config.maxSize - config.minSize) + config.minSize) + 'px';
-    snowflake.style.opacity = Math.random() * (config.maxOpacity - config.minOpacity) + config.minOpacity;
-    snowflake.style.pointerEvents = 'none';
-    snowflake.style.zIndex = '9997';
-    snowflake.style.textShadow = '0 0 5px rgba(255, 255, 255, 0.8)';
-    snowflake.style.fontFamily = 'Arial, sans-serif';
-
+    const size = Math.random() * (config.maxSize - config.minSize) + config.minSize;
+    const opacity = Math.random() * (config.maxOpacity - config.minOpacity) + config.minOpacity;
     const duration = Math.random() * (config.maxDuration - config.minDuration) + config.minDuration;
-    snowflake.style.animation = `fall ${duration}s linear forwards`;
-
-    // Add slight horizontal drift
     const drift = (Math.random() - 0.5) * 100;
-    snowflake.style.setProperty('--drift', drift + 'px');
+
+    snowflake.textContent = char;
+    snowflake.className = 'christmas-snowflake';
+
+    // Apply all styles at once to minimize reflows
+    snowflake.style.cssText = `
+      position: fixed;
+      top: -20px;
+      left: ${Math.random() * window.innerWidth}px;
+      color: white;
+      font-size: ${size}px;
+      opacity: ${opacity};
+      pointer-events: none;
+      z-index: 9997;
+      font-family: Arial, sans-serif;
+      will-change: transform;
+      animation: christmas-snowfall ${duration}s linear forwards;
+      --drift: ${drift}px;
+    `;
 
     document.body.appendChild(snowflake);
 
-    // Remove snowflake after animation
-    setTimeout(() => {
+    // Remove snowflake after animation completes
+    const cleanup = () => {
       if (snowflake.parentNode) {
         snowflake.remove();
       }
-    }, duration * 1000);
+      activeSnowflakes--;
+    };
+
+    // Use animationend event for more reliable cleanup
+    snowflake.addEventListener('animationend', cleanup, { once: true });
+
+    // Fallback timeout in case animationend doesn't fire
+    setTimeout(cleanup, (duration + 1) * 1000);
   }
 
   // Add keyframes for falling animation
   function addStyles() {
     const style = document.createElement('style');
+    style.id = 'christmas-snowflake-styles';
     style.textContent = `
-      @keyframes fall {
+      @keyframes christmas-snowfall {
         0% {
           transform: translateY(-20px) translateX(0) rotate(0deg);
         }
@@ -74,26 +103,67 @@
           transform: translateY(100vh) translateX(var(--drift, 0px)) rotate(360deg);
         }
       }
+      .christmas-snowflake {
+        contain: layout style;
+      }
     `;
     document.head.appendChild(style);
+  }
+
+  // Handle visibility changes to pause/resume animations
+  function handleVisibilityChange() {
+    isVisible = !document.hidden;
+
+    if (isVisible && !intervalId) {
+      startSnowfall();
+    } else if (!isVisible && intervalId) {
+      stopSnowfall();
+    }
+  }
+
+  function startSnowfall() {
+    if (intervalId) return;
+
+    intervalId = setInterval(() => {
+      requestAnimationFrame(createSnowflake);
+    }, config.creationInterval);
+  }
+
+  function stopSnowfall() {
+    if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
   }
 
   // Initialize snowflakes
   function init() {
     // Wait for DOM to be ready
-    if (document.body) {
-      addStyles();
-
-      // Create initial batch of snowflakes
-      for (let i = 0; i < Math.min(20, config.snowflakeCount); i++) {
-        setTimeout(() => createSnowflake(), i * 200);
-      }
-
-      // Continue creating snowflakes periodically
-      setInterval(createSnowflake, config.creationInterval);
-    } else {
+    if (!document.body) {
       setTimeout(init, 100);
+      return;
     }
+
+    // Don't initialize twice
+    if (document.getElementById('christmas-snowflake-styles')) {
+      return;
+    }
+
+    addStyles();
+
+    // Listen for visibility changes
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Create initial batch of snowflakes with staggered timing
+    const initialBatch = Math.min(10, config.snowflakeCount);
+    for (let i = 0; i < initialBatch; i++) {
+      setTimeout(() => {
+        requestAnimationFrame(createSnowflake);
+      }, i * 200);
+    }
+
+    // Start continuous snowfall
+    startSnowfall();
   }
 
   // Start when DOM is ready

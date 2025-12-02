@@ -2,7 +2,7 @@
   "name": "christmas-theme",
   "displayName": "Christmas Theme",
   "description": "A festive Christmas theme with light and dark versions featuring holiday colors and optional snowflake animations",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "butta-themes",
   "engines": {
     "vscode": "^1.80.0"
