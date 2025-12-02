@@ -60,9 +60,11 @@ Alternatively:
 2. Type "Preferences: Color Theme"
 3. Select your preferred Christmas theme
 
-## Enabling Snowflake Animations
+## Enabling Falling Animations
 
-The snowflake animations are optional and require the Custom CSS and JS Loader extension:
+The falling animations (snowflakes by default) are optional and require the Custom CSS and JS Loader extension.
+
+> **💡 Tip:** For animations in **all VS Code windows**, add configuration to **User Settings**. For project-specific animations, use **Workspace Settings**.
 
 ### Step 1: Install Custom CSS and JS Loader
 
@@ -70,37 +72,57 @@ The snowflake animations are optional and require the Custom CSS and JS Loader e
 2. Search for "Custom CSS and JS Loader" by be5invis
 3. Install the extension
 
-### Step 2: Configure Snowflakes
+### Step 2: Configure Animations
 
-1. Open your VS Code settings (`settings.json`):
+**Option A: User Settings (Recommended - applies to all VS Code windows)**
+
+1. Open your **User** settings.json:
    - Press `Ctrl+Shift+P` / `Cmd+Shift+P`
-   - Type "Preferences: Open Settings (JSON)"
+   - Type "Preferences: Open **User** Settings (JSON)"
    - Press Enter
 
-2. Add the following configuration (update the paths to match your installation):
+2. Add one of the configuration options below
 
-   **For CSS-only snowflakes (lightweight):**
-   ```json
-   {
-     "vscode_custom_css.imports": [
-       "file:///C:/path/to/butta-themes/snowflakes.css"
-     ]
-   }
-   ```
+**Option B: Workspace Settings (project-specific)**
 
-   **For JavaScript snowflakes (more realistic, recommended):**
-   ```json
-   {
-     "vscode_custom_css.imports": [
-       "file:///C:/path/to/butta-themes/snowflakes.css",
-       "file:///C:/path/to/butta-themes/snowflakes.js"
-     ]
-   }
-   ```
+1. Open `.vscode/settings.json` in your project folder
+2. Add one of the configuration options below
 
-   **Path Examples:**
-   - Windows: `file:///C:/Users/YourName/.vscode/extensions/christmas-theme/snowflakes.css`
-   - macOS/Linux: `file:///Users/YourName/.vscode/extensions/christmas-theme/snowflakes.css`
+### Configuration Options
+
+**Option 1: Default Snowflakes (Recommended)**
+```json
+{
+  "vscode_custom_css.imports": [
+    "file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/snowflakes.js"
+  ]
+}
+```
+
+**Option 2: Custom Configuration**
+```json
+{
+  "vscode_custom_css.imports": [
+    "file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/falling-config.js",
+    "file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/snowflakes.js"
+  ]
+}
+```
+Then edit `falling-config.js` to customize characters, speed, size, etc.
+
+**Option 3: CSS-Only (Ultra-lightweight)**
+```json
+{
+  "vscode_custom_css.imports": [
+    "file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/snowflakes.css"
+  ]
+}
+```
+
+**Path Examples:**
+- Windows: `file:///C:/Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/`
+- macOS: `file:///Users/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/`
+- Linux: `file:///home/YourName/.vscode/extensions/butta-themes.christmas-theme-1.0.1/`
 
 ### Step 3: Enable Custom CSS
 
@@ -150,19 +172,60 @@ Or simply remove the `vscode_custom_css.imports` from your settings.json.
 
 ## Customization
 
-You can customize the snowflake animations by editing `snowflakes.js`:
+### Animation Configuration
+
+Customize the falling animations by editing `falling-config.js`:
 
 ```javascript
-const config = {
-  snowflakeCount: 50,        // Number of snowflakes
-  creationInterval: 300,     // Milliseconds between creating snowflakes
-  minDuration: 10,           // Minimum fall duration in seconds
-  maxDuration: 20,           // Maximum fall duration in seconds
-  minSize: 8,                // Minimum snowflake size in pixels
-  maxSize: 18,               // Maximum snowflake size in pixels
-  minOpacity: 0.3,           // Minimum opacity
-  maxOpacity: 0.7,           // Maximum opacity
+window.buttaThemeConfig = {
+  fallingAnimation: {
+    enabled: true,
+
+    // Choose characters or images
+    characters: ['❄', '❅', '❆'],  // Snowflakes (default)
+    // characters: ['🍂', '🍁', '🍃'],  // Autumn leaves
+    // characters: ['❤', '💕', '💖'],  // Hearts
+
+    // Or use custom images (SVG, PNG, etc.)
+    // images: [
+    //   'file:///path/to/image1.svg',
+    //   'file:///path/to/image2.png'
+    // ],
+
+    // Performance settings
+    maxItems: 40,              // Max items on screen
+    spawnRate: 0.03,           // Spawn probability per frame
+
+    // Movement settings
+    minSpeed: 0.3,             // Minimum fall speed
+    maxSpeed: 1.2,             // Maximum fall speed
+    drift: 0.3,                // Horizontal drift amount
+    rotationSpeed: 0.02,       // Rotation speed
+
+    // Appearance settings
+    minSize: 8,                // Minimum size in pixels
+    maxSize: 16,               // Maximum size in pixels
+    minOpacity: 0.4,           // Minimum opacity
+    maxOpacity: 0.85           // Maximum opacity
+  }
 };
+```
+
+### Using Custom Images
+
+You can use SVG, PNG, or any image format:
+
+```javascript
+// Local files
+images: [
+  'file:///Users/YourName/Pictures/logo.svg',
+  'file:///Users/YourName/Pictures/icon.png'
+]
+
+// Or inline SVG using data URIs
+images: [
+  'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="white"/></svg>'
+]
 ```
 
 ## Troubleshooting
@@ -179,11 +242,14 @@ const config = {
 - Restart VS Code after enabling
 - On some systems, you may need to grant VS Code permission to modify itself
 
-### Performance issues with snowflakes
-- Reduce `snowflakeCount` in snowflakes.js
-- Increase `creationInterval` to create snowflakes less frequently
-- Use CSS-only version instead of JavaScript version
-- Disable snowflakes if needed
+### Performance issues with animations
+The new canvas-based animation is highly optimized, but if you still experience issues:
+- Reduce `maxItems` in `falling-config.js` (try 20-30 instead of 40)
+- Lower `spawnRate` to create items less frequently (try 0.01-0.02)
+- Use text characters instead of images (images require more processing)
+- Switch to the CSS-only version (`snowflakes.css`) for minimal impact
+- Disable animations entirely by setting `enabled: false` in config
+- Make sure animations are in **User Settings** not duplicated in multiple workspace settings
 
 ## Contributing
 

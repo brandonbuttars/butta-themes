@@ -54,5 +54,5 @@
   "editor.cursorBlinking": "smooth",
   "editor.smoothScrolling": true,
   "workbench.list.smoothScrolling": true,
-  "editor.cursorSmoothCaretAnimation": "on"
+  "editor.cursorSmoothCaretAnimation": "on",
 }
