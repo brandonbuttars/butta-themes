@@ -1,5 +1,8 @@
 /*
- * Christmas Theme Snowflakes Animation
+ * Christmas Theme Snowflakes Animation - CSS Only (Lightweight)
+ *
+ * This is a pure CSS alternative that uses no JavaScript.
+ * It's extremely lightweight but less dynamic than the JS version.
  *
  * To use this with VS Code:
  * 1. Install the "Custom CSS and JS Loader" extension
@@ -7,112 +10,46 @@
  *    "vscode_custom_css.imports": ["file:///path/to/snowflakes.css"]
  * 3. Run command: "Enable Custom CSS and JS"
  * 4. Restart VS Code
+ *
+ * NOTE: For the best snowflake effect, use snowflakes.js instead.
+ *       This CSS version is provided as a fallback with minimal performance impact.
+ *
+ * Performance notes:
+ * - Uses GPU-accelerated transforms only
+ * - Single pseudo-element layer (not two)
+ * - Reduced gradient complexity
+ * - Uses will-change for optimization hints
  */
 
-/* Snowflake container */
+/* Single snowflake layer - uses GPU-accelerated transform animation */
 .monaco-workbench::before {
   content: '';
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 200%; /* Double height for seamless loop */
   pointer-events: none;
   z-index: 9999;
   background-image:
-    radial-gradient(2px 2px at 20% 30%, white, transparent),
-    radial-gradient(2px 2px at 60% 70%, white, transparent),
-    radial-gradient(1px 1px at 50% 50%, white, transparent),
-    radial-gradient(1px 1px at 80% 10%, white, transparent),
-    radial-gradient(2px 2px at 90% 60%, white, transparent),
-    radial-gradient(1px 1px at 33% 80%, white, transparent),
-    radial-gradient(2px 2px at 15% 90%, white, transparent);
-  background-size: 200% 200%;
-  animation: snowfall 20s linear infinite;
-  opacity: 0.4;
+    radial-gradient(2px 2px at 10% 15%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(3px 3px at 25% 35%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(2px 2px at 45% 25%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(2px 2px at 65% 45%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(3px 3px at 85% 20%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(2px 2px at 35% 75%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(2px 2px at 75% 65%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(3px 3px at 55% 85%, rgba(255, 255, 255, 0.6), transparent);
+  background-size: 100% 50%; /* Pattern repeats at 50% height */
+  will-change: transform;
+  animation: css-snowfall 25s linear infinite;
 }
 
-/* Snowflake layer 2 - different speed */
-.monaco-workbench::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9998;
-  background-image:
-    radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.8), transparent),
-    radial-gradient(2px 2px at 40% 40%, rgba(255, 255, 255, 0.6), transparent),
-    radial-gradient(1px 1px at 70% 10%, rgba(255, 255, 255, 0.7), transparent),
-    radial-gradient(2px 2px at 25% 75%, rgba(255, 255, 255, 0.5), transparent),
-    radial-gradient(1px 1px at 85% 50%, rgba(255, 255, 255, 0.8), transparent),
-    radial-gradient(1px 1px at 45% 90%, rgba(255, 255, 255, 0.6), transparent);
-  background-size: 250% 250%;
-  animation: snowfall 30s linear infinite;
-  opacity: 0.3;
-}
-
-@keyframes snowfall {
+@keyframes css-snowfall {
   0% {
-    background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    transform: translateY(-50%); /* Start with pattern above viewport */
   }
   100% {
-    background-position: 10% 100%, 20% 100%, 15% 100%, 25% 100%, 30% 100%, 35% 100%, 5% 100%;
+    transform: translateY(0%); /* End with pattern at normal position */
   }
 }
-
-/* Individual snowflakes for more realistic effect */
-.snowflake {
-  position: fixed;
-  top: -10px;
-  color: white;
-  font-size: 1em;
-  font-family: Arial, sans-serif;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
-  pointer-events: none;
-  z-index: 9997;
-  animation: fall linear infinite;
-  opacity: 0.7;
-}
-
-@keyframes fall {
-  0% {
-    transform: translateY(-10px) rotate(0deg);
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-  }
-}
-
-/* Alternative: Create snowflakes with JavaScript
- * Add this to a snowflakes.js file and include it via Custom CSS and JS Loader
- */
-
-/*
-(function() {
-  function createSnowflake() {
-    const snowflake = document.createElement('div');
-    snowflake.innerHTML = '❄';
-    snowflake.className = 'snowflake';
-    snowflake.style.left = Math.random() * window.innerWidth + 'px';
-    snowflake.style.animationDuration = Math.random() * 3 + 10 + 's';
-    snowflake.style.opacity = Math.random() * 0.5 + 0.3;
-    snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
-    document.body.appendChild(snowflake);
-
-    setTimeout(() => {
-      snowflake.remove();
-    }, 15000);
-  }
-
-  // Create snowflakes periodically
-  setInterval(createSnowflake, 300);
-
-  // Initial snowflakes
-  for (let i = 0; i < 20; i++) {
-    setTimeout(createSnowflake, i * 200);
-  }
-})();
-*/

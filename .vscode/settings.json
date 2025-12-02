@@ -1,43 +1,51 @@
 {
   // Christmas Theme - Recommended VS Code Settings
   //
-  // SNOWFLAKE EFFECT SETUP:
-  // The snowflake animation requires the "Custom CSS and JS Loader" extension.
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FALLING ANIMATION SETUP (Optional)
+  // ═══════════════════════════════════════════════════════════════════════════
+  //
+  // The falling animation requires the "Custom CSS and JS Loader" extension.
+  //
+  // Quick Setup:
   // 1. Install extension: be5invis.vscode-custom-css
-  // 2. Update the paths below to match your extension installation location
-  // 3. Run command palette (Cmd/Ctrl+Shift+P): "Enable Custom CSS and JS"
-  // 4. Restart VS Code
+  // 2. Copy ONE of the options below to your settings.json
+  // 3. Update the path to match your extension installation
+  // 4. Run command: "Enable Custom CSS and JS" (Cmd/Ctrl+Shift+P)
+  // 5. Restart VS Code
   //
-  // IMPORTANT: You must use absolute file paths. Update the paths below!
+  // Extension paths:
+  //   macOS:   /Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.1/
+  //   Windows: C:/Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.1/
+  //   Linux:   /home/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.1/
   //
-  // Common installation paths:
-  //   macOS:   ~/.vscode/extensions/butta-themes.christmas-theme-1.0.0/
-  //   Windows: %USERPROFILE%\.vscode\extensions\butta-themes.christmas-theme-1.0.0\
-  //   Linux:   ~/.vscode/extensions/butta-themes.christmas-theme-1.0.0/
-
-  // Uncomment and update paths to enable snowflakes:
+  // ─────────────────────────────────────────────────────────────────────────────
+  // OPTION 1: Default snowflakes (no config needed)
+  // ─────────────────────────────────────────────────────────────────────────────
+  //
   // "vscode_custom_css.imports": [
-  //   "file:///Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.0/snowflakes.css",
-  //   "file:///Users/YOUR_USERNAME/.vscode/extensions/butta-themes.christmas-theme-1.0.0/snowflakes.js"
+  //   "file:///PATH_TO_EXTENSION/snowflakes.js"
   // ],
-
-  // Choose ONE of the following snowflake options:
   //
-  // Option 1: CSS-only snowflakes (lightweight, subtle effect)
+  // ─────────────────────────────────────────────────────────────────────────────
+  // OPTION 2: Custom configuration (load config BEFORE snowflakes.js)
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Edit falling-config.js to customize: characters, speed, count, size, etc.
+  //
+  // "vscode_custom_css.imports": [
+  //   "file:///PATH_TO_EXTENSION/falling-config.js",
+  //   "file:///PATH_TO_EXTENSION/snowflakes.js"
+  // ],
+  //
+  // ─────────────────────────────────────────────────────────────────────────────
+  // OPTION 3: CSS-only (ultra-lightweight, no config)
+  // ─────────────────────────────────────────────────────────────────────────────
+  //
   // "vscode_custom_css.imports": [
   //   "file:///PATH_TO_EXTENSION/snowflakes.css"
   // ],
   //
-  // Option 2: JavaScript snowflakes (more realistic, animated Unicode snowflakes)
-  // "vscode_custom_css.imports": [
-  //   "file:///PATH_TO_EXTENSION/snowflakes.js"
-  // ],
-  //
-  // Option 3: Both CSS and JS (maximum festive effect)
-  // "vscode_custom_css.imports": [
-  //   "file:///PATH_TO_EXTENSION/snowflakes.css",
-  //   "file:///PATH_TO_EXTENSION/snowflakes.js"
-  // ],
+  // ═══════════════════════════════════════════════════════════════════════════
 
   // Theme recommendation
   "workbench.colorTheme": "Christmas Dark",
